@@ -12,3 +12,16 @@ class BD:
             return False
         self.person_list[key] = person
         return True
+
+    def remove_by_key(self, key: str):
+        pass
+
+    def remove_by_phone_number(self, phone: str):
+        pass
+
+    def search(self, ddmm=default, mm=default, sign=default, name=default, surname=default, phone_number=default):
+        pass
+
+    def change_field(self, key: str):
+        pass
+    
