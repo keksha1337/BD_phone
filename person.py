@@ -44,3 +44,11 @@ class Person:
 
     def get_age(self) -> int:
         return int((date.today() - self.birthday_date).days / 365.25)
+
+    def __str__(self):
+        result = self.name + ';' + self.surname + ';'
+        result = result + str(self.birthday_date.day) + '.' + str(self.birthday_date.month) + '.' + str(self.birthday_date.year) + ';'
+        for phone_name in self.phones:
+            result = result + phone_name + ':' + self.phones[phone_name] + '@'
+        result = result[:-1] + ';'
+        return result
