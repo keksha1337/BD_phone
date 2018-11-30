@@ -1,11 +1,20 @@
 import time
 from datetime import date
 class Person:
-    def __init__(self):
-        self.name = 'none'
-        self.surname = 'none'
-        self.birthday_date = 'none'
-        self.phones = dict()
+    def __init__(self, line='none'):
+        if line == 'none':
+            self.name = 'none'
+            self.surname = 'none'
+            self.birthday_date = 'none'
+            self.phones = dict()
+        else:
+            line = line.split(';')
+            self.name = line[0]
+            self.surname = line[1]
+            self.set_birthday_date(line[2])
+            self.phones = dict()
+            for number in line[3].split('@'):
+                self.phones[number.split(':')[0]] = number.split(':')[1]
         
     def set_name(self, name: str):
         self.name = name

@@ -16,7 +16,7 @@ class BD:
     def remove_by_key(self, key: str):
         self.person_list.pop(key)
 
-    def search(self, ddmm='none', mm='none', sign='none', age='none', name='none', surname='none', phone_number='none'):
+    def search(self, ddmm='none', mm='none', sign='none', age='none', name='none', surname='none', phone_number='none') -> dict:
         result = self.person_list
         if name != 'none':
             result = self.search_by_name(result, name)

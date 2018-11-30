@@ -1,5 +1,7 @@
 from person import Person
 from BD import BD
+from FileWorker import FileWorker
+
 p1 = Person()
 p1.set_name('Max')
 p1.set_surname('Moshkov')
@@ -39,3 +41,16 @@ people = bd.get_all()
 
 for p in people:
     print(p)
+
+print('\n\n\nFROM FILE:::')
+fileworker = FileWorker()
+bd = fileworker.read_from_file()
+p2 = Person()
+p2.set_name('Kek')
+p2.set_surname('Lolov')
+p2.set_birthday_date('19.08.1975')
+p2.add_phone('tel_1_3', '89026811185')
+p2.add_phone('tel_2_3', '89023001910')
+bd.add(p2)
+fileworker.rewrite_file(bd)
+print(bd)
