@@ -2,16 +2,18 @@ from person import Person
 from BD import BD
 from FileWorker import FileWorker
 
+fileworker = FileWorker()
+
 def show_menu():
-    print('''_______________
-Print' to show all.\n
+    print('''_______________\n
+'Print' to show all.\n
 'Search' to searching.\n
 'Add' to add new person.\n
 'Remove' to remove.\n
 'Change' to any changes.\n
 'Show age' to show person's age.\n
 'quit' to quit.\n
-_______________''')
+_______________\n''')
 
 def print_person(person: Person):
     print(person.get_name() + ' ' + person.get_surname())
@@ -37,6 +39,14 @@ def add(bd: BD) -> BD:
         pers.add_phone(input('Input new phone name:\t'), input('Input new phone number'))
         ph = input('Add other phone? Y/N')
     bd.add(pers)
+    fileworker.write_to_end(pers)
+    return bd
+
+def remove(bd: BD) -> BD:
+    name = input('Input name: ')
+    surname = input('Input surname: ')
+    bd.remove_by_key(name + surname)
+    fileworker.rewrite_file(bd)
     return bd
 
 def search():
@@ -76,7 +86,6 @@ def search():
         if ch == '2':
             show_list_person(bd.search(ddmm=ddmm,mm=mm,sign=sign,name=name,surname=surname,phone_number=phone_number))        
 
-fileworker = FileWorker()
 bd = fileworker.read_from_file()
 comand = '0'
 while 1:
@@ -88,6 +97,16 @@ while 1:
         search()
     elif comand == 'Add':
         bd = add(bd)
+    elif comand == 'Remove':
+        bd = remove(bd)
+    elif comand == 'Change':
+        bd = remove(bd)
+        bd = add(bd)
+    elif comand == 'Show age':
+        name = input('Input name: ')
+        surname = input('Input surname: ')
+        for pers in bd.search(name=name, surname=surname):
+            print(bd.search(name=name, surname=surname)[pers].get_age())
     elif comand == 'quit':
         break;
     comand = input("'0' to show menu again.\n")
