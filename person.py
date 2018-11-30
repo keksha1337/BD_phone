@@ -1,11 +1,12 @@
 import time
 from datetime import date
 class Person:
-    name = 'none'
-    surname = 'none'
-    birthday_date = 'none'
-    phones = dict()
-
+    def __init__(self):
+        self.name = 'none'
+        self.surname = 'none'
+        self.birthday_date = 'none'
+        self.phones = dict()
+        
     def set_name(self, name: str):
         self.name = name
 
@@ -44,6 +45,9 @@ class Person:
 
     def get_age(self) -> int:
         return int((date.today() - self.birthday_date).days / 365.25)
+
+    def __lt__(self, other):
+        return (self.name + self.surname) < (other.name + other.surname)
 
     def __str__(self):
         result = self.name + ';' + self.surname + ';'
