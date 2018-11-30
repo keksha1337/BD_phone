@@ -25,6 +25,20 @@ def show_list_person(people: dict):
     for person in people:
         print_person(people[person])
 
+def add(bd: BD) -> BD:
+    pers = Person()
+    pers.set_name(input('Input name: '))
+    pers.set_surname(input('Input surname: '))
+    birth = input("Add birthday? Y/N")
+    if birth == 'Y':
+        pers.set_birthday_date(input("Input birthday date: dd.mm.yyyy : "))
+    ph = 'Y'
+    while ph == 'Y':
+        pers.add_phone(input('Input new phone name:\t'), input('Input new phone number'))
+        ph = input('Add other phone? Y/N')
+    bd.add(pers)
+    return bd
+
 def search():
     ddmm = 'none'
     mm = 'none'
@@ -72,6 +86,8 @@ while 1:
         show_list_person(bd.person_list)
     elif comand == 'Search':
         search()
+    elif comand == 'Add':
+        bd = add(bd)
     elif comand == 'quit':
         break;
     comand = input("'0' to show menu again.\n")
