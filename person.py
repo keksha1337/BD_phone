@@ -9,18 +9,18 @@ class Person:
             self.phones = dict()
         else:
             line = line.split(';')
-            self.name = line[0]
-            self.surname = line[1]
+            self.name = line[0].title()
+            self.surname = line[1].title()
             self.set_birthday_date(line[2])
             self.phones = dict()
             for number in line[3].split('@'):
                 self.phones[number.split(':')[0]] = number.split(':')[1]
         
     def set_name(self, name: str):
-        self.name = name
+        self.name = name.title()
 
     def set_surname(self, surname: str):
-        self.surname = surname
+        self.surname = surname.title()
 
     def set_birthday_date(self, birthday_date: str):
         [dd, mm, yyyy] = birthday_date.split('.')
@@ -60,7 +60,10 @@ class Person:
 
     def __str__(self):
         result = self.name + ';' + self.surname + ';'
-        result = result + str(self.birthday_date.day) + '.' + str(self.birthday_date.month) + '.' + str(self.birthday_date.year) + ';'
+        try:
+            result = result + str(self.birthday_date.day) + '.' + str(self.birthday_date.month) + '.' + str(self.birthday_date.year) + ';'
+        except:
+            result = result + "none;"
         for phone_name in self.phones:
             result = result + phone_name + ':' + self.phones[phone_name] + '@'
         result = result[:-1] + ';'
