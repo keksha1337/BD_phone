@@ -11,7 +11,10 @@ class Person:
             line = line.split(';')
             self.name = line[0].title()
             self.surname = line[1].title()
-            self.set_birthday_date(line[2])
+            try:
+                self.set_birthday_date(line[2])
+            except:
+                self.birtday_date = 'none'
             self.phones = dict()
             for number in line[3].split('@'):
                 self.phones[number.split(':')[0]] = number.split(':')[1]
